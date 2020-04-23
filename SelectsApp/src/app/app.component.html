@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+
+      <h1>Selects y Options anidados</h1>
+
+      <ul *ngFor="let filtro of filtrosUsuario">
+        <li *ngFor="let item of filtro.filtros">{{item.nombre}}</li>
+      </ul>
+
+      <form class="form form-horizontal form-bordered" [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
+        <div class="form-group" *ngFor="let filtro of filtrosUsuario">
+          <label [for]="filtro.etiqueta">{{filtro.nombre}}</label>
+          <select class="form-control"  
+          [formControlName]="filtro.etiqueta" [id]="filtro.etiqueta" [name]="filtro.etiqueta">
+            <option *ngFor="let item of filtro.filtros" [value]="item.valor">{{item.nombre}}</option>
+          </select>
+        </div>
+
+        <button type="submit" [disabled]="!formGroup.valid" class="btn btn-primary">Enviar</button>
+        <button type="reset" class="btn btn-danger ml-2">Limpiar</button>
+      </form>
+
+    </div>
+  </div>
+
+</div>
